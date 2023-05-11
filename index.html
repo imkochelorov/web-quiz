@@ -7,27 +7,30 @@
     </title>
 
     <link rel="stylesheet" href="styles.css">
+    <script src="data.js"></script>
     <script src="scripts.js"></script>
 </head>
 
 <body>
-    <div class="termsContainer" id="answer">
-        <div class="lineWrapper"><div draggable="true" class="term" id="0">Обществознание</div></div>
-        <div class="lineWrapper"><div draggable="true" class="term" id="1">Экономика</div></div>
-        <div class="lineWrapper"><div draggable="true" class="term" id="2">Человек</div></div>
-        <div class="lineWrapper"><div draggable="true" class="term" id="3">Собака</div></div>
-        <div class="lineWrapper"><div draggable="true" class="term" id="4">Школа космонавтики</div></div>
+    <div class="definitionsContainer">
+        <div class="definition" id="first"><div class="dropTarget">Биопсихосоциальное существо</div></div>
+        <div class="definition" id="second"><div class="dropTarget">Зверь</div></div>
+        <div class="definition" id="third"><div class="dropTarget">Наука о деньгах</div></div>
+        <div class="definition" id="forth"><div class="dropTarget">Урок</div></div>
+        <div class="definition" id="fifth"><div class="dropTarget">Пространство возможностей</div></div>
     </div>
 
-    <div class="definitionsContainer">
-        <div class="definition" id=""><div class="linWrapper"><div class="droptarget">Биопсихосоциальное существо</div></div></div>
-        <div class="definition"><div class="linWrapper"><div class="droptarget">Зверь</div></div></div>
-        <div class="definition"><div class="linWrapper"><div class="droptarget">Наука о деньгах</div></div></div>
-        <div class="definition"><div class="linWrapper"><div class="droptarget">Урок</div></div></div>
-        <div class="definition"><div class="linWrapper"><div class="droptarget">Пространство возможностей</div></div></div>
+
+    <div class="characteristicsContainer" id="answer">
+        <div draggable="true" class="characteristic" id="first">Обществознание</div>
+        <div draggable="true" class="characteristic" id="second">Экономика</div>
+        <div draggable="true" class="characteristic" id="third">Человек</div>
+        <div draggable="true" class="characteristic" id="forth">Собака</div>
+        <div draggable="true" class="characteristic" id="fifth">Школа космонавтики</div>
     </div>
     <p id="demo"></p>
-    <button id="check">Check</button>
+    <button class="button" role="button" id="check">Check</button>
+    <button class="button" role="button" id="refresh">Refresh</button>
 </body>
 
 </html>
