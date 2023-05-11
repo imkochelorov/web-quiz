@@ -1,17 +1,33 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>
-            23 задание ЕГЭ по обществознанию
-        </title>
 
-        <script src="myScript.js"></script> 
-    </head>
-    <body>
-        <div id="task"></div>
+<head>
+    <title>
+        23 задание ЕГЭ по обществознанию
+    </title>
 
-        <button id="submit">Проверить</button>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js"></script>
+</head>
 
-        <div id="results"></div>
-    </body>
+<body>
+    <div class="termsContainer" id="answer">
+        <div class="lineWrapper"><div draggable="true" class="term" id="0">Обществознание</div></div>
+        <div class="lineWrapper"><div draggable="true" class="term" id="1">Экономика</div></div>
+        <div class="lineWrapper"><div draggable="true" class="term" id="2">Человек</div></div>
+        <div class="lineWrapper"><div draggable="true" class="term" id="3">Собака</div></div>
+        <div class="lineWrapper"><div draggable="true" class="term" id="4">Школа космонавтики</div></div>
+    </div>
+
+    <div class="definitionsContainer">
+        <div class="definition" id=""><div class="linWrapper"><div class="droptarget">Биопсихосоциальное существо</div></div></div>
+        <div class="definition"><div class="linWrapper"><div class="droptarget">Зверь</div></div></div>
+        <div class="definition"><div class="linWrapper"><div class="droptarget">Наука о деньгах</div></div></div>
+        <div class="definition"><div class="linWrapper"><div class="droptarget">Урок</div></div></div>
+        <div class="definition"><div class="linWrapper"><div class="droptarget">Пространство возможностей</div></div></div>
+    </div>
+    <p id="demo"></p>
+    <button id="check">Check</button>
+</body>
+
 </html>
