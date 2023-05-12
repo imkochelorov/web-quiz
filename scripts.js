@@ -22,22 +22,32 @@ var hoveredWithDragCharacteristic;
 function refreshTask() {
     let dropTargetsHTMLCollection = document.getElementsByClassName("dropTarget");
     let dropTargets = Array.from(dropTargetsHTMLCollection);
-    let characteristics = [];
     let characteristicsHTML = [];
+
+    let termsIndex = [];
+    let termIndex = 0;
+    while (termIndex < 5) {
+        let random = getRandomInt(data.length);
+        if (!termsIndex.includes(random)) {
+            termsIndex.push(random);
+            termIndex++;
+        }
+    }
+
     for (let dropTargetIndex = 0; dropTargetIndex < dropTargets.length; dropTargetIndex++) {
-        dropTargets[dropTargetIndex].id = data[dropTargetIndex].id;
-        dropTargets[dropTargetIndex].innerHTML = data[dropTargetIndex].term;
+        dropTargets[dropTargetIndex].id = data[termsIndex[dropTargetIndex]].id;
+        dropTargets[dropTargetIndex].innerHTML = data[termsIndex[dropTargetIndex]].term;
 
         characteristics = [];
-        for (let definitionIndex = 0; definitionIndex < Math.min(3, data[dropTargetIndex].characteristics.length); definitionIndex++) {
-            let random = getRandomInt(data[dropTargetIndex].characteristics.length);
+        for (let definitionIndex = 0; definitionIndex < Math.min(3, data[termsIndex[dropTargetIndex]].characteristics.length); definitionIndex++) {
+            let random = getRandomInt(data[termsIndex[dropTargetIndex]].characteristics.length);
             if (!characteristics.includes(random)) {
                 characteristics.push(random);
             }
         }
 
         characteristics.forEach(characteristic => {
-            characteristicsHTML.push('<div draggable="true" class="characteristic" id="' + data[dropTargetIndex].id + '">' + data[dropTargetIndex].characteristics[characteristic] + '</div>');
+            characteristicsHTML.push('<div draggable="true" class="characteristic" id="' + data[termsIndex[dropTargetIndex]].id + '">' + data[termsIndex[dropTargetIndex]].characteristics[characteristic] + '</div>');
         });
     }
 
