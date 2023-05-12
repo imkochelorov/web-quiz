@@ -18,6 +18,7 @@ const hoveredWithDragOpacity = "0.7"
 
 var draggedCharacteristic;
 var hoveredWithDragCharacteristic;
+var characteristicBaseColor;
 
 function refreshTask() {
     let definitions = Array.from(document.getElementsByClassName("definition"));
@@ -67,12 +68,14 @@ function refreshTask() {
 
 window.onload = function () {
     refreshTask();
+    characteristicBaseColor = document.getElementsByClassName("characteristic")[0].style.backgroundColor;
 
     document.getElementById("refresh").addEventListener("click", refreshTask);
 
     document.addEventListener("dragstart", function (event) {
         draggedCharacteristic = event.target;
-        event.target.style.opacity = hoveredWithDragOpacity;
+        draggedCharacteristic.style.opacity = hoveredWithDragOpacity;
+        draggedCharacteristic.style.backgroundColor = characteristicBaseColor;
     });
 
     document.addEventListener("drag", function (event) {
@@ -110,8 +113,12 @@ window.onload = function () {
         event.preventDefault();
         let targetDiv = event.target;
         if (targetDiv.className == "dropTarget") {
-            targetDiv.style.opacity = "1";
+            targetDiv.style.opacity = 1;
             targetDiv.parentElement.appendChild(draggedCharacteristic);
+            draggedCharacteristic = null;
+        }
+        else if (targetDiv.className == "definition") {
+            targetDiv.appendChild(draggedCharacteristic);
             draggedCharacteristic = null;
         }
         else if (targetDiv.className == "characteristic") {
@@ -123,6 +130,9 @@ window.onload = function () {
 
                 targetDivParent.appendChild(draggedCharacteristic);
                 draggedCharacteristic = null;
+            }
+            else {
+                document.getElementById("characteristicsContainer").appendChild(draggedCharacteristic);
             }
         }
         else {
