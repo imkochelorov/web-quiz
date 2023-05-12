@@ -20,10 +20,15 @@ var draggedCharacteristic;
 var hoveredWithDragCharacteristic;
 
 function refreshTask() {
-    let dropTargetsHTMLCollection = document.getElementsByClassName("dropTarget");
-    let dropTargets = Array.from(dropTargetsHTMLCollection);
-    let characteristicsHTML = [];
+    let definitions = Array.from(document.getElementsByClassName("definition"));
+    definitions.forEach(definition => {
+        let characteristics = Array.from(definition.getElementsByClassName("characteristic"));
+        characteristics.forEach(characteristic => {
+            characteristic.remove();
+        });
+    });
 
+    let dropTargets = Array.from(document.getElementsByClassName("dropTarget"));
     let termsIndex = [];
     let termIndex = 0;
     while (termIndex < 5) {
@@ -34,6 +39,7 @@ function refreshTask() {
         }
     }
 
+    characteristicsHTML = [];
     for (let dropTargetIndex = 0; dropTargetIndex < dropTargets.length; dropTargetIndex++) {
         dropTargets[dropTargetIndex].id = data[termsIndex[dropTargetIndex]].id;
         dropTargets[dropTargetIndex].innerHTML = data[termsIndex[dropTargetIndex]].term;
