@@ -1,17 +1,58 @@
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}
+function shuffle(array) {
+    let currentIndex = array.length, randomIndex;
+
+    while (currentIndex != 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]];
+    }
+
+    return array;
+}
+
 const hoveredWithDragOpacity = "0.7"
 
 var draggedCharacteristic;
 var hoveredWithDragCharacteristic;
 
-function refresh() {
-    //document.getElementById("first").
+function refreshTask() {
+    let dropTargetsHTMLCollection = document.getElementsByClassName("dropTarget");
+    let dropTargets = Array.from(dropTargetsHTMLCollection);
+    let characteristics = [];
+    let characteristicsHTML = [];
+    for (let dropTargetIndex = 0; dropTargetIndex < dropTargets.length; dropTargetIndex++) {
+        dropTargets[dropTargetIndex].id = data[dropTargetIndex].id;
+        dropTargets[dropTargetIndex].innerHTML = data[dropTargetIndex].term;
+
+        characteristics = [];
+        for (let definitionIndex = 0; definitionIndex < Math.min(3, data[dropTargetIndex].characteristics.length); definitionIndex++) {
+            let random = getRandomInt(data[dropTargetIndex].characteristics.length);
+            if (!characteristics.includes(random)) {
+                characteristics.push(random);
+            }
+        }
+
+        characteristics.forEach(characteristic => {
+            characteristicsHTML.push('<div draggable="true" class="characteristic" id="' + data[dropTargetIndex].id + '">' + data[dropTargetIndex].characteristics[characteristic] + '</div>');
+        });
+    }
+
+    shuffle(characteristicsHTML);
+    characteristicsContainer = document.getElementById("characteristicsContainer");
+    characteristicsContainer.innerHTML = ""
+    characteristicsHTML.forEach(characteristicHTML => {
+        characteristicsContainer.innerHTML = characteristicsContainer.innerHTML + characteristicHTML;
+    });
 }
 
 window.onload = function () {
+    refreshTask();
 
-    refresh();
-
-    document.getElementById("refresh").addEventListener("click", refresh);
+    document.getElementById("refresh").addEventListener("click", refreshTask);
 
     document.addEventListener("dragstart", function (event) {
         draggedCharacteristic = event.target;
@@ -19,7 +60,7 @@ window.onload = function () {
     });
 
     document.addEventListener("drag", function (event) {
-        
+
     });
 
     document.addEventListener("dragend", function (event) {
@@ -69,23 +110,26 @@ window.onload = function () {
             }
         }
         else {
-            document.getElementById("answer").appendChild(draggedCharacteristic);
+            document.getElementById("characteristicsContainer").appendChild(draggedCharacteristic);
         }
     });
 
     document.getElementById("check").addEventListener("click", function () {
-        let definitions = document.getElementsByClassName("definition");
-        for (let index = 0; index < definitions.length; index++) {
-            let definition = definitions[index];
-            let characteristic = definition.getElementsByClassName("characteristic")[0];
-            if (characteristic != null) {
-                if (characteristic.id == definition.id) {
-                    characteristic.style.backgroundColor = "rgb(200, 255, 200)";
+        let definitionsHTMLCollection = document.getElementsByClassName("definition");
+        let definitions = Array.from(definitionsHTMLCollection);
+        definitions.forEach(definition => {
+            let characteristicsHTMLCollection = definition.getElementsByClassName("characteristic");
+            let characteristics = Array.from(characteristicsHTMLCollection);
+            characteristics.forEach(characteristic => {
+                if (characteristic != null) {
+                    if (characteristic.id == definition.getElementsByClassName("dropTarget")[0].id) {
+                        characteristic.style.backgroundColor = "rgb(200, 255, 200)";
+                    }
+                    else {
+                        characteristic.style.backgroundColor = "rgb(255, 200, 200)";
+                    }
                 }
-                else {
-                    characteristic.style.backgroundColor = "rgb(255, 200, 200)";
-                }
-            }
-        }
+            })
+        });
     });
 }

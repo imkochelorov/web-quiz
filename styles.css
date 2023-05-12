@@ -1,24 +1,34 @@
-.characteristicsContainer {
+#characteristicsContainer {
     position: absolute;
     right: 0;
     top: 0;
+    max-width: 40%;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .25px;
 }
 
-.definitionsContainer {
+#definitionsContainer {
     position: absolute;
     left: 0;
     top: 0;
+    max-width: 40%;
+    font-family: "Google Sans", Roboto, Arial, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: .25px;
 }
 
 .characteristic {
-    background-color: rgb(230, 230, 230);
+    background-color: rgb(255, 255, 255);
     padding: 15px;
     border-radius: 24px;
     color: rgb(0, 0, 0);
-    font-weight: bold;
     text-align: center;
-
-    margin: 25px;
+    margin: 15px;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    
 }
 
 .dropTarget {
@@ -26,18 +36,20 @@
     padding: 15px;
     border-radius: 24px;
     color: rgb(0, 0, 0);
-    font-weight: bold;
     text-align: center;
-
-    margin: 25px;
+    margin: 15px;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    
 }
 
 .definition {
     background-color: rgb(250, 250, 250);
     height: auto;
-    margin: 25px;
+    margin: 10px;
     border: 2px solid rgb(230, 230, 230);
     border-radius: 24px;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px, rgba(0, 0, 0, .14) 0 6px 10px 0, rgba(0, 0, 0, .12) 0 1px 18px 0;
+    
 }
 
 #check {
