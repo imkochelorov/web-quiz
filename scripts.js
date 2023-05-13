@@ -19,7 +19,7 @@ const termsCount = 3;
 
 var draggedCharacteristic;
 var hoveredWithDragCharacteristic;
-var characteristicBaseColor;
+var characteristicBaseColor = "rgb(255, 255, 255)";
 
 function refreshTask() {
     let definitions = Array.from(document.getElementsByClassName("definition"));
@@ -74,7 +74,6 @@ function refreshTask() {
 
 window.onload = function () {
     refreshTask();
-    characteristicBaseColor = document.getElementsByClassName("characteristic")[0].style.backgroundColor;
 
     document.getElementById("refresh").addEventListener("click", refreshTask);
 
