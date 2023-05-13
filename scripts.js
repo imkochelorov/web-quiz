@@ -14,7 +14,8 @@ function shuffle(array) {
     return array;
 }
 
-const hoveredWithDragOpacity = "0.7"
+const hoveredWithDragOpacity = "0.7";
+const termsCount = 3;
 
 var draggedCharacteristic;
 var hoveredWithDragCharacteristic;
@@ -29,38 +30,43 @@ function refreshTask() {
         });
     });
 
-    let dropTargets = Array.from(document.getElementsByClassName("dropTarget"));
+    let termsHTML = [];
     let termsIndex = [];
     let termIndex = 0;
-    while (termIndex < 5) {
+    while (termIndex < termsCount) {
         let random = getRandomInt(data.length);
         if (!termsIndex.includes(random)) {
+            termsHTML[termIndex] = '<div class="definition"><div class="dropTarget" id="' + data[random].id + '">' + data[random].term + '</div></div>';
             termsIndex.push(random);
             termIndex++;
         }
     }
 
     characteristicsHTML = [];
-    for (let dropTargetIndex = 0; dropTargetIndex < dropTargets.length; dropTargetIndex++) {
-        dropTargets[dropTargetIndex].id = data[termsIndex[dropTargetIndex]].id;
-        dropTargets[dropTargetIndex].innerHTML = data[termsIndex[dropTargetIndex]].term;
+    for (let termIndex = 0; termIndex < termsIndex.length; termIndex++) {
 
         characteristics = [];
-        for (let definitionIndex = 0; definitionIndex < Math.min(3, data[termsIndex[dropTargetIndex]].characteristics.length); definitionIndex++) {
-            let random = getRandomInt(data[termsIndex[dropTargetIndex]].characteristics.length);
+        for (let definitionIndex = 0; definitionIndex < Math.min(3, data[termsIndex[termIndex]].characteristics.length); definitionIndex++) {
+            let random = getRandomInt(data[termsIndex[termIndex]].characteristics.length);
             if (!characteristics.includes(random)) {
                 characteristics.push(random);
             }
         }
 
         characteristics.forEach(characteristic => {
-            characteristicsHTML.push('<div draggable="true" class="characteristic" id="' + data[termsIndex[dropTargetIndex]].id + '">' + data[termsIndex[dropTargetIndex]].characteristics[characteristic] + '</div>');
+            characteristicsHTML.push('<div draggable="true" class="characteristic" id="' + data[termsIndex[termIndex]].id + '">' + data[termsIndex[termIndex]].characteristics[characteristic] + '</div>');
         });
     }
 
+    shuffle(termsHTML);
     shuffle(characteristicsHTML);
+    termsContainer = document.getElementById("termsContainer");
     characteristicsContainer = document.getElementById("characteristicsContainer");
-    characteristicsContainer.innerHTML = ""
+    termsContainer.innerHTML = "";
+    characteristicsContainer.innerHTML = "";
+    termsHTML.forEach(termHTML => {
+        termsContainer.innerHTML = termsContainer.innerHTML + termHTML;
+    });
     characteristicsHTML.forEach(characteristicHTML => {
         characteristicsContainer.innerHTML = characteristicsContainer.innerHTML + characteristicHTML;
     });
