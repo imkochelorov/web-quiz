@@ -5,9 +5,9 @@ body {
     letter-spacing: .25px;
 }
 
-@media screen and (max-width: 1000px) {
+@media screen and (max-width: 1200px) {
     body {
-        font-size: 24px;
+        font-size: 25px;
         font-weight: 200;
     }
     .button {
